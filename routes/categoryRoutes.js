@@ -1,27 +1,24 @@
 const express = require("express");
 const {
-  getCategoryValidator,
+  getCategoryValidator, createCategoryValidator, updateCategoryValidator, deleteCategoryValidator
 } = require("../utils/Validators/categoryValidator");
 
 const {
-  getCategories,
+  getCategories,  
   createCategory,
   getCategory,
   updateCategory,
   deleteCategory,
-} = require("../services/categoryServices");
+} = require("../services/categoryService");
 
 const router = express.Router();
 
 // Routes
-router.route("/").get(getCategories).post(createCategory);
+router.route("/").get(getCategories).post(createCategoryValidator, createCategory);
 router
   .route("/:id")
-  .get(
-    // getCategoryValidator // when i use i give an error
-    getCategory
-  )
-  .put(updateCategory)
-  .delete(deleteCategory);
+  .get(getCategoryValidator, getCategory)
+  .put(updateCategoryValidator, updateCategory)
+  .delete(deleteCategoryValidator, deleteCategory);
 
 module.exports = router;

@@ -37,7 +37,7 @@ exports.getCategory = asyncHandler(async (req, res) => {
 // @access Private
 exports.createCategory = asyncHandler(async (req, res) => {
   const name = req.body.name;
-  const category = await Category.create({ name, slug: slugify(name) });
+  const category = await CategoryModel.create({ name, slug: slugify(name) });
   res.status(201).json({ data: category });
 });
 
